@@ -29,6 +29,7 @@ public class Customer {
   private String fullName;
   private Integer balance;
   private boolean active;
+  @Column(nullable = false, unique = true)
   private String username;
   private String password;
 

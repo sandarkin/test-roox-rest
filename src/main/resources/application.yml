@@ -3,6 +3,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: sa
@@ -10,9 +11,16 @@ spring:
     driver-class-name: org.h2.Driver
     platform: h2
 
-  # enable H2 web console and set url for web console
-  # http://localhost:8080/h2console
   h2:
     console:
       enabled: true
       path: /h2console
+
+roox.security.jwt:
+  tokenSignKey: xCaLzuKMHUGy3ZkQxnVqhj8LWkxDg3qq
+  tokenIssuer: http://roox.ru
+  tokenExpSec: 600
+  refreshTokenExpSec: 1800
+
+security:
+  ignored: /h2console/**

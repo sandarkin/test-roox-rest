@@ -10,6 +10,4 @@ import ru.sandarkin.roox.model.PartnerMapping;
 @RepositoryRestResource
 public interface PartnerMappingRepository extends JpaRepository<PartnerMapping, UUID> {
 
-
-
 }

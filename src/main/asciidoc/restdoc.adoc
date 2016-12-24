@@ -1,0 +1,323 @@
+= Roox RESTful API Guide
+Roman Sandarkin;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RESTful service tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+RESTful service tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[overview-errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a JSON object
+that describes the problem. The error object has the following structure:
+
+include::{snippets}/error-example/response-fields.adoc[]
+
+For example, a request that attempts to apply a non-existent mapping to a customer will produce a
+`400 Bad Request` response:
+
+include::{snippets}/error-example/http-response.adoc[]
+
+[[overview-hypermedia]]
+== Hypermedia
+
+RESTful service uses hypermedia and resources include links to other resources in their
+responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application
+from resource to resource.
+Language (HAL)] format. Links can be found beneath the `_links` key. Users of the API should
+not create URIs themselves, instead they should use the above-described links to navigate
+
+[[resources]]
+= Resources
+
+
+
+[[resources-index]]
+== Index
+
+The index provides the entry point into the service.
+
+
+
+[[resources-index-access]]
+=== Accessing the index
+
+A `GET` request is used to access the index
+
+==== Response structure
+
+include::{snippets}/index-example/response-fields.adoc[]
+
+==== Example response
+
+include::{snippets}/index-example/http-response.adoc[]
+
+
+
+[[resources-index-links]]
+==== Links
+
+include::{snippets}/index-example/links.adoc[]
+
+[[resources-customers]]
+== Customers
+
+The Customers resources is used to list customers and to retrieve individual customer.
+
+Each user has access to its own customer. But user with ADMIN_ROLE has access to all customers.
+
+[[resources-customers-list]]
+=== Listing customers
+
+A `GET` request will list all available customers.
+
+==== Response structure
+
+include::{snippets}/customers-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/customers-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customers-list-example/http-response.adoc[]
+
+[[resources-customers-list-links]]
+==== Links
+
+include::{snippets}/customers-list-example/links.adoc[]
+
+
+[[resources-customer-retrieve]]
+=== Retrieve a customer
+
+A `GET` request will retrieve the details of a customer
+
+==== Response structure
+
+include::{snippets}/customer-get-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/customer-get-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customer-get-example/http-response.adoc[]
+
+[[resources-customer-links]]
+==== Links
+
+include::{snippets}/customer-get-example/links.adoc[]
+
+[[resources-customer-me-retrieve]]
+=== Retrieve Me
+
+A `GET` request will retrieve the details of a customer for current logged user.
+
+==== Response structure
+
+include::{snippets}/customer-get-me-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/customer-get-me-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/customer-get-me-example/http-response.adoc[]
+
+[[resources-customer-links]]
+==== Links
+
+include::{snippets}/customer-get-me-example/links.adoc[]
+
+
+
+
+
+
+[[resources-mappings]]
+== Partner Mappings
+
+The Partner Mappings resources is used to list Partner Mappings and to retrieve, create, update, and delete individual individual Partner Mapping.
+
+Each user has access to mappings that it owns. But user with ADMIN_ROLE has access to all mappings.
+
+[[resources-mappings-list]]
+=== Listing customer's mappings
+
+A `GET` request will list customer's mappings.
+
+==== Response structure
+
+include::{snippets}/mappings-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/mappings-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mappings-list-example/http-response.adoc[]
+
+[[resources-mappings-list-links]]
+==== Links
+
+include::{snippets}/mappings-list-example/links.adoc[]
+
+
+
+[[resources-mappings-avail-list]]
+=== Listing available mappings
+
+A `GET` request will list mappings available for current logged in user.
+
+==== Response structure
+
+include::{snippets}/mappings-avail-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/mappings-avail-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mappings-avail-list-example/http-response.adoc[]
+
+[[resources-mappings-list-links]]
+==== Links
+
+include::{snippets}/mappings-avail-list-example/links.adoc[]
+
+
+
+[[resources-mapping-retrieve]]
+=== Retrieve a mapping
+
+A `GET` request will retrieve the details of a mapping
+
+==== Response structure
+
+include::{snippets}/mapping-get-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/mapping-get-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mapping-get-example/http-response.adoc[]
+
+[[resources-mapping-links]]
+==== Links
+
+include::{snippets}/mapping-get-example/links.adoc[]
+
+
+
+[[resources-mapping-create]]
+=== Creating a mapping
+
+A `POST` request is used to create a mapping
+
+==== Request structure
+
+include::{snippets}/mapping-create-example/request-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/mapping-create-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mapping-create-example/http-response.adoc[]
+
+
+
+[[resources-mapping-update]]
+=== Update a mapping
+
+A `PUT` request is used to update a mapping
+
+==== Request structure
+
+include::{snippets}/mapping-update-example/request-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/mapping-update-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mapping-update-example/http-response.adoc[]
+
+
+
+[[resources-mapping-delete]]
+=== Delete a mapping
+
+A `DELETE` request is used to delete a mapping
+
+==== Example request
+
+include::{snippets}/mapping-delete-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/mapping-delete-example/http-response.adoc[]
+

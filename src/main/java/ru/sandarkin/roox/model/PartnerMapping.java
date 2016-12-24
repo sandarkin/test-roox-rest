@@ -27,10 +27,18 @@ public class PartnerMapping {
   private String partnerId;
   private String accountId;
   private String fullName;
+  @Column(columnDefinition="VARBINARY(5000)")
   private byte[] avatar;
 
   @ManyToOne
-  @JoinColumn(name = "customer_id")
+  @JoinColumn(name = "customer_id", nullable = false)
   private Customer customer;
 
+  public PartnerMapping() {
+    this.id = UUID.randomUUID();
+  }
+
+  public PartnerMapping(UUID id) {
+    this.id = id;
+  }
 }

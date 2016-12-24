@@ -17,6 +17,9 @@ public class JwtAuthProvider implements AuthenticationProvider {
   @Autowired
   private JwtProperties jwtProperties;
 
+  /**
+   * Method try to authenticate against Jwt.
+   */
   @Override
   public Authentication authenticate(Authentication authentication) {
     try {

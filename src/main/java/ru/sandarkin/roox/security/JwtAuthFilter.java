@@ -1,6 +1,5 @@
 package ru.sandarkin.roox.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -12,13 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.sandarkin.roox.config.JwtProperties;
-
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-  @Autowired
-  private JwtProperties jwtProperties;
-
+  /**
+   * Method check request for Bearer and push it to provider.
+   */
   @Override
   public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
       throws IOException, ServletException {

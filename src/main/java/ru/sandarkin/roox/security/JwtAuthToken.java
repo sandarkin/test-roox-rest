@@ -84,7 +84,7 @@ public class JwtAuthToken implements Authentication {
     if (this.authorities == null) {
       ArrayList<GrantedAuthority> temp = new ArrayList<>(roles.size());
       for (String role : roles) {
-        temp.add(new SimpleGrantedAuthority(role));
+        temp.add(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()));
       }
       this.authorities = Collections.unmodifiableList(temp);
     }

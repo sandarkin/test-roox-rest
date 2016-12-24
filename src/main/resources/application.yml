@@ -10,11 +10,11 @@ spring:
     password:
     driver-class-name: org.h2.Driver
     platform: h2
-
   h2:
     console:
       enabled: true
       path: /h2console
+  jackson.serialization.indent_output: true
 
 roox.security.jwt:
   tokenSignKey: xCaLzuKMHUGy3ZkQxnVqhj8LWkxDg3qq
@@ -23,4 +23,4 @@ roox.security.jwt:
   refreshTokenExpSec: 1800
 
 security:
-  ignored: /h2console/**
+  ignored: /h2console/**, /javadoc/**, /restdoc.html

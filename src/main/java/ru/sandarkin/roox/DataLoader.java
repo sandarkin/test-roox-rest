@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 import ru.sandarkin.roox.model.Customer;
+import ru.sandarkin.roox.model.PartnerMapping;
 import ru.sandarkin.roox.repository.CustomerRepository;
 import ru.sandarkin.roox.repository.PartnerMappingRepository;
 
@@ -47,6 +48,28 @@ public class DataLoader implements ApplicationRunner {
     marley.setUsername("marley");
     marley.setPassword("ioyerw87y");
     customerRepository.save(marley);
+
+    PartnerMapping kevinMapping1 = new PartnerMapping(UUID.fromString("356afa54-4434-4399-8b3d-c9fe82df530e"));
+    kevinMapping1.setPartnerId("973065359403599");
+    kevinMapping1.setFullName("Kevin on FB");
+    kevinMapping1.setAccountId("100001006414253");
+    kevinMapping1.setCustomer(kevin);
+    kevinMapping1.setAvatar("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAvNJREFUeNp8k11MUmEYx/9wQErIWaEoKjRtgqI1m9kszaGtqZu65SzXpJu2Ppbd1LzVzS7r0nnfRbKpiV554Y06q6m4RV8iRsgMooGBggJ6gJ73ZMtqdbYfh73n+f+fj/d9RW1tbRCJRBCLxcKbyCJKAKiIDPx4toivqVRqmfATSCaTYG8Jfj0yokqr1V7o6Oi4XlhYWM7zvPBBIpHA6XS+HRkZGXK73S9oaYGIs2+cXq9nWZn4cktLS5fJZHrI22wq3/AwvgwOIjA2hrDTCYVcrqq/dvUSVco5HA4mdhMJTqfTsVJqWltbu4xG4w1XXx+kc3PQUlZtbi7ylEootrawOTsLn3UJ5aau0xzH8WTiZybiRCKh0mg0tQ0N9SZnXy9yKDhHpcL29jYCgYDAzs4OVLSm3NjAWn8/6urqTHl5ebVMywwM7e1XOj9PTSHD44WIBuP1ehEMBn/D5/NBxAblWoN/ZhrNzU2dTCuhH3VBQYHB8WwIJxQKeDweYXB7u7tC5h2qZJf+/xyoOj8fWLQi985tA9Myg8xwOIKozQY+KwvVMzNCBaFQCNQr5HI5FGSclpYmGExXVCBFsdFoDEwrIWfWBnja1+jmJux2u5BNKpX+JRa2jaqJUaygIS0zCHOcBFJDGWLWRbiNRvzvSSczFguImUGYZfeurn60KyqrEIzFoJHJoGa9/oMotZV+5ixcrjU70zKDN2az2aKsqUO87BQ2KeAIHWsFBf9JmNpKUqKj1TWYmLBYmJbLzs6OBIPfpIDo8MV7D0o/vXsD/7obclauUCgJiVVi+9x5lDx6gvHx0efz8y8tdABfc/sXw7O8/F5MsxE39vTqcbIYbk6KJc86HBIp+PpGqG/eRfGt+zCbn46Pjg5ZotHoJJ0PXrSf5JBMJjtGEzfqdKVV3d09TZWV1UUHh2e1vnIODDyeXFn5sBCJRKbj8fgGLceYAUdkEsdZq7R9mXT7iujSZB28zlSln6bu3NvbC7FuiAAR+i7AAKjye47FnCxuAAAAAElFTkSuQmCC".getBytes());
+    partnerMappingRepository.saveAndFlush(kevinMapping1);
+
+    PartnerMapping kevinMapping2 = new PartnerMapping(UUID.fromString("f7e1fa4c-c98c-11e6-9d9d-cec0c932ce01"));
+    kevinMapping2.setPartnerId("555345673456700");
+    kevinMapping2.setFullName("Kevin on Twitter");
+    kevinMapping2.setAccountId("69532555");
+    kevinMapping2.setCustomer(kevin);
+    partnerMappingRepository.saveAndFlush(kevinMapping2);
+
+    PartnerMapping fullerMapping1 = new PartnerMapping();
+    fullerMapping1.setPartnerId("555345673456700");
+    fullerMapping1.setFullName("Fuller on Twitter");
+    fullerMapping1.setAccountId("69532555");
+    fullerMapping1.setCustomer(fuller);
+    partnerMappingRepository.saveAndFlush(fullerMapping1);
 
   }
 

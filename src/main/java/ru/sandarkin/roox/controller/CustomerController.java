@@ -3,6 +3,8 @@ package ru.sandarkin.roox.controller;
 import org.springframework.data.rest.webmvc.PersistentEntityResource;
 import org.springframework.data.rest.webmvc.PersistentEntityResourceAssembler;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +24,16 @@ public class CustomerController {
     this.customerRepository = customerRepository;
   }
 
+  /**
+   * Shortcut for findOne for current logged user.
+   */
   @RequestMapping(value = "/customers/@me", method = RequestMethod.GET)
-  public PersistentEntityResource getMe(Principal principal,
-                                        PersistentEntityResourceAssembler assembler) {
+  public ResponseEntity<Resource<?>> getMe(Principal principal,
+                                           PersistentEntityResourceAssembler assembler) {
     Customer customer = customerRepository.findOne(((JwtAuthToken)principal).getId());
-    return assembler.toResource(customer);
+    PersistentEntityResource resource = assembler.toFullResource(customer);
+    return new ResponseEntity<>(resource, HttpStatus.OK);
+
   }
 
 }

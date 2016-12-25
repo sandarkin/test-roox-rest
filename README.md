@@ -8,6 +8,8 @@
  - введены роли пользователей – USER и ADMIN
  - в приложение внедрена автогенерируемая документация javadoc ([http://localhost:8080/javadoc/index.html](http://localhost:8080/javadoc/index.html))
  - в приложение внедрена автогенерируемая документация rest ([http://localhost:8080/restdoc.html](http://localhost:8080/restdoc.html))
+ - также для удобства работы со встроенной базой даннх включена h2console ([http://localhost:8080/h2console](http://localhost:8080/h2console))  
+ jdbc url = jdbc:h2:mem:testdb, username = sa, password пустой
  
 ### Предварительные требования
 Java 8 и Gradle 3
